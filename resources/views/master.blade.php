@@ -64,6 +64,7 @@
 <!-- General JS Scripts -->
 <script src="{{asset('assets/bundles/lib.vendor.bundle.js')}}"></script>
 <script src="{{asset('assets/js/CodiePie.js')}}"></script>
+<script src="{{asset('assets/js/DragTask.js')}}"></script>
 <!-- JS Libraies -->
 <script src="{{asset('assets/modules/jquery.sparkline.min.js')}}"></script>
 <script src="{{asset('assets/modules/chart.min.js')}}"></script>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Task;
 use App\Models\AssignedTask;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Label;
 
 class TaskController extends Controller
 {
@@ -56,8 +57,9 @@ class TaskController extends Controller
     {
     $show = Task::where('project_id',1);
     $labels=  $show->pluck('label');
-    $labels=  json_decode($labels)[0];
-    $task_id=  $show->pluck('id')[0];
+  
+    $labels=  json_decode($labels)[0] ?? null;
+    $task_id=  $show->pluck('id')[0] ??null;
     $show = $show->get();
     // dd(json_decode($labels));
     $assigned_people= AssignedTask::select('users.name')

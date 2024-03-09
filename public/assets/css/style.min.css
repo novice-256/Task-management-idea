@@ -6495,3 +6495,17 @@ body:not(.sidebar-mini) .sidebar-style-3 .sidebar-menu li.active ul.dropdown-men
         width: 70%;
 
     }
+.task-main .card-group{
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+}
+.task-main .card-group .card{
+    min-width: fit-content;
+    
+}
+.task-main .card-group .card-header{
+    min-height: 50px !important;
+    padding:  0;
+
+}
