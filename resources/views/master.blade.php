@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{asset( 'assets/modules/summernote/summernote-bs4.css')}}">
 <link rel="stylesheet" href="{{asset( 'assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{asset( 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/modules/prism/prism.css')}}">
 
 <!-- CSS Libraries -->
 <link rel="stylesheet" href="{{asset('assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
@@ -66,6 +67,7 @@
 <script src="{{asset('assets/js/CodiePie.js')}}"></script>
 <script src="{{asset('assets/js/DragTask.js')}}"></script>
 <!-- JS Libraies -->
+
 <script src="{{asset('assets/modules/jquery.sparkline.min.js')}}"></script>
 <script src="{{asset('assets/modules/chart.min.js')}}"></script>
 <script src="{{asset('assets/modules/owlcarousel2/dist/owl.carousel.min.js')}}"></script>
@@ -82,6 +84,7 @@
 <script src="{{asset('assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
 <script src="{{asset('assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="{{asset('assets/modules/jquery-selectric/jquery.selectric.min.js')}}"></script>
+<script src="{{asset('assets/modules/prism/prism.js')}}"></script>
 
 <!-- Page Specific JS File -->
 <script src="{{asset('assets/js/page/index.js')}}"></script>
@@ -91,6 +94,9 @@
 {{-- ion icons --}}
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="{{asset('assets/js/page/bootstrap-modal.js')}}"></script>
+
+
 </body>
 
 <!--   Tue, 07 Jan 2020 03:35:12 GMT -->
