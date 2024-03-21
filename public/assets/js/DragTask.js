@@ -1,12 +1,15 @@
 
-//  Drag a Task 
+var folderName = "";
+const baseUrl =  window.location.protocol + "//" + window.location.hostname;
+
+//  Drag a Task
 $('.draggable').on('dragstart', function(event) {
     $(this).addClass('is-dragging');
     });
 
     $('.draggable').on('dragend', function() {
         $('.draggable').removeClass('is-dragging');
-        
+
     });
     $('.droppable').on('dragover', function(event) {
             event.preventDefault();
@@ -20,7 +23,7 @@ $('.draggable').on('dragstart', function(event) {
             }
         });
     function getNearestItem(container, mouseY) {
-        const items = container.querySelectorAll('.draggable:not(.is-dragging)');
+        const items = container.querySelectorAll('.draggable:not(.is-dragging):not(.not-placeable)');
         let nearestItem = null;
         items.forEach(item => {
             const rect = item.getBoundingClientRect();
@@ -36,25 +39,3 @@ $('.draggable').on('dragstart', function(event) {
         });
         return nearestItem;
     }
-
-//  task togglers
-
- $(()=>{
-     $('.task-label li strong').toggle();
-
-    simpleToggle('.add-sub-task' , '.toggle-sub-task','top')
-    simpleToggle('.task-label' , 'li strong','')
-    simpleToggle('.task-label' , 'li' ,{class:'col w-auto',direction:'right'})
-   
-
-})
-function simpleToggle(target, toggleItem, extraParam) {
-    $(target).on('click',function ()  {
-        if (extraParam && extraParam.class) {
-          return $(this).find(toggleItem).toggleClass(extraParam.class);
-        } 
-        return $(this).find(toggleItem).toggle({direction :extraParam.direction });
-
-
-    });
-}

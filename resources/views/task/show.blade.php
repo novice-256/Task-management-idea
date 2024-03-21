@@ -1,5 +1,16 @@
 @extends('master')
 @section('content')
+
+<section class="section">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+<div class="section-header ">
+    <h1>Board</h1>
+    <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+        <div class="breadcrumb-item"><a href="#">Components</a></div>
+        <div class="breadcrumb-item">Board</div>
+    </div>
+</div>
     <div class="section-body task-main  h-100  ">
         {{-- task area top --}}
         <div class="w-100 p-3 d-flex justify-content-around align-items-center" style="background: #3b3d5599">
@@ -273,6 +284,7 @@
                 </div>
             </div>
         </div>
+    </section>
 
 
 
@@ -291,11 +303,15 @@
                 </div>
                 <div class="modal-body">
                         {{-- main --}}
-         @include('task.card.card_body') 
-       </div>
+        @include('task.card.card_body')
+        </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
               </div>
             </div>
-          </div> 
+          </div>  
         {{-- <div class="modal fade show" id="card-setting-modal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" style="display: block;">
             <div class="modal-dialog modal-dialog-centered w-100 justify-content-center d-flex " role="document">
@@ -310,14 +326,15 @@
                             Cover
                         </span>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body"> --}}
                         {{-- main --}}
-                 </div>
+        {{-- @include('task.card.card_body') --}}
+                 {{-- </div> --}}
                     {{-- <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+                    </div> --}}
+                {{-- </div>
             </div>
-        </div> --}} 
+        </div> --}}
     @endsection

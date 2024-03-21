@@ -51,19 +51,28 @@
             <div class="desc-top d-flex">
                 <span><ion-icon name="menu-outline"></ion-icon></span>
                 <h6>Description</h6>
-                <button class="btn"> Edit</button>
+                <button class="btn task-desc"> Edit</button>
             </div>
             <div class="desc-text">
-                <p class="text-secondary-subtle">
+                <p class="text-secondary-subtle task-desc" >
                     here we do all the planning related to making clone of Trello because we don’t want to pay to Trello.
                 </p>
+                <div class="form-group row task-desc-input " style="display: none">
+                    <div class="col-12 ">
+                        <textarea class="summernote-simple"></textarea>
+                    </div>
+                    <div class="mt-0 d-flex col justify-content-end">
+                        <button class=" text-capitalize  mx-1  btn cancel-desc">close</button>
+                        <button class=" text-capitalize  mx-1  btn " id="save-desc">save</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="checklist-wrapper">
             <div class="checklist-header ">
                 <span><ion-icon name="checkbox-outline"></ion-icon></span>
                 <h6>Checklist Name</h6>
-                <button class="btn mr-2">Hide Checklist Item</button>
+                <button class="btn mr-2 hide-checked">Hide Checked Item</button>
                 <button class="btn ">Delete</button>
             </div>
             <div class="progress-wrapper ">
@@ -73,17 +82,24 @@
                 </div>
             </div>
             <ul class="check-list list-unstyled">
-                <li><input type="checkbox" name="" id="for-list-1">
+                <li><input type="checkbox" name="" id="for-list-1" >
                      <label class="d-inline-block col-10" for="for-list-1">Multiple Members Assign</label>
                     <span class="border rounded-circle d-inline-block p-1 px-2">
                         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
 
                     </span>
                 </li>
-                <li>
-                    <button class="btn">Add Item</button>
+                <li><input type="checkbox" name="" id="for-list-2" >
+                     <label class="d-inline-block col-10" for="for-list-2">Another checklist item</label>
+                    <span class="border rounded-circle d-inline-block p-1 px-2">
+                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+
+                    </span>
                 </li>
                 
+                <li>
+                    <button class="btn">Add an Item</button>
+                </li>
             </ul>
             <div class="activity">
                 <div class="activity-top ">
@@ -98,12 +114,13 @@
                             <input class="form-control mx-2" placeholder="Write Comment... "></p>
                     </li>
                     <li>
-                            <span class=" avatar bg-secondary text-centermx-2">AD</span>
-                            <div class="mx-2 col">
-                                <h6>Muhammad Saeed <small>{{'Mar 15'}} at {{'10:15 AM'}} </small></h6>
-                                <p class="d-inline-block p-2 border rounded-4 col">date range picker added in the sidebar.</p>
-                            </div>
+                        <span class="avatar bg-secondary text-center mx-2">AD</span>
+                        <div class="mx-2 col">
+                            <h6>Muhammad Saeed <small>{{'Mar 15'}} at {{'10:15 AM'}} </small></h6>
+                            <p class="d-inline-block p-2 border rounded-4 col">date range picker added in the sidebar.</p>
+                        </div>
                     </li>
+                    
                 </ul>
             </div>
 
@@ -160,32 +177,54 @@
                     </div>
                 </div>
             </li>
-            <li class="sidebar-items">
+            <li class="sidebar-items position-relative">
     
                 <p class="bg-secondary-subtle border rounded rounded-4 m-0 py-2 my-1">
                     <span class="mx-2 "><ion-icon name="calendar-outline"></ion-icon> </span>
                     <span class=""> Dates</span>
-                    <div class="form-group">
-                        <label>Date Range Picker</label>
-                        <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                            <i class="fas fa-calendar"></i>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control daterange-cus">
-                        </div>
-                    </div>
+                    <input type="text" name="daterange" value="01/01/2018 - 01/15/2018"
+                      class="position-absolute top-0 opacity-0"  style="left:0;"/>
+                   
                 </p>
             </li>
             <li class="sidebar-items">
-    
-                <p class="bg-secondary-subtle border rounded rounded-4 m-0 py-2 my-1">
+                <div class="bg-secondary-subtle border rounded rounded-4 m-0 py-2 my-1 dropdown">
                     <span class="mx-2 "><ion-icon name="document-attach-outline"></ion-icon></span>
-                    <span class=""> Attachment</span>
-                </p>
-            </li>
+                    <span class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > Attachment</span>
+                    <div class="dropdown-menu  fit-content-w members-list" aria-labelledby="membersToggle">
+                        <p class="dropdown-title  text-left p-0 m-0 fw-bold">Attachments </p>
+                        <a class="dropdown-item w-auto " href="#">
+                            <div class="form-group">
+                            <label for="thumbnail"></label>
+                            <div class="col-sm-12 col-md-7">
+                                <div id="image-preview" class="image-preview">
+                                    <label for="image-upload" id="image-label">Choose File</label>
+                                    <input type="file" name="image" id="image-upload">
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+
+                    </div>
+                </div>
+        </li>
             
         </ul>
     </div>
 </div>
+
+<script>
+    $(function() {
+      $('input[name="daterange"]').daterangepicker({
+        opens: 'left'
+      }, function(start, end, label) {
+        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      });
+    });
+
+
+    $(document).on('click', '.task-desc , .cancel-desc ', () => {
+  $('.task-desc').toggle();
+  $('.task-desc-input').toggle();
+});
+    </script>

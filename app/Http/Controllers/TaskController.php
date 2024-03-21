@@ -1,12 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Events\TaskEvents;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Task;
 use App\Models\AssignedTask;
+use App\Models\Project;
+
 use Illuminate\Http\Request;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\Route ;
 use PhpParser\Node\Stmt\Label;
+use ReflectionClass;
 
 class TaskController extends Controller
 {
@@ -23,7 +30,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-
+        // dd('crewat ');
+        return view('user.create');
     }
 
     /**
@@ -55,9 +63,13 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+    // dd(explode('@',Route::currentRouteAction())[1]);
+
+    // dd(Logger::class );
     $show = Task::where('project_id',1);
-    $labels=  $show->pluck('label');
-  
+    // dd(count( $show->get())?'true':'false');
+    $labels=  $show->pluck('label')??null;
+
     $labels=  json_decode($labels)[0] ?? null;
     $task_id=  $show->pluck('id')[0] ??null;
     $show = $show->get();
@@ -65,7 +77,9 @@ class TaskController extends Controller
     $assigned_people= AssignedTask::select('users.name')
     ->join('users','assigned_tasks.user_id','=','users.id')
     ->where('task_id', $task_id )->get();
-        return view('task.show',compact('show' ,'assigned_people' ,'labels'));
+    $project = Project::where('id','=',1)->first();
+        TaskEvents::dispatch($task);
+        return view('task.show',compact('show' ,'assigned_people' ,'labels','project'));
     }
 
     /**
@@ -81,7 +95,8 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+    //    dd($request->all());
+        return response()->json(['message' => 'Task updated successfully']);
     }
 
     /**
