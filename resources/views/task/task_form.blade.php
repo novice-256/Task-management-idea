@@ -1,6 +1,5 @@
-<div class=" " id="add-task-form">
-
-<form  action="{{url('task/store')}}" class="border border-rounded p-3" method="POST" style="">
+<div class=" " id="add-task-form" style="display:none">
+<form  action="{{url('task/store')}}" class="border border-rounded p-3" method="POST" >
     @csrf
     <div class="col-12 position-relative">
             <span class="float-right cursor-pointer positon-sticky sticky-top  shadow-sm icon-hover  rounded  d-inline-block p-2" id="close-task-form">

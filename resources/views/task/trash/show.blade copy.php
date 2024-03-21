@@ -121,20 +121,5 @@
 
         </div>
     </section>
-    <script>
-    $(()=>{
-        // $('#add-task-form').hide()
-            $('.toggle-btn').next().toggle()
-        $('.toggle-btn').on('click', function () {
-            let nameAttr = $(this).attr('name');
-            $('.toggle-btn').next().not(`#toggle-task-${nameAttr}`).hide();
-            $(`#toggle-task-${nameAttr}`).toggle();
-        });
-
-        $('#show-task-form').on('click',()=>{
-            $('#add-task-form').toggle( { direction: "right" }, 1000);
-        })
-        });
-
-    </script>
+  
 @endsection

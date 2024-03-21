@@ -1,7 +1,8 @@
 
-var folderName = "";
-const baseUrl =  window.location.protocol + "//" + window.location.hostname;
 
+
+
+//  Drag a Task
 //  Drag a Task
 $('.draggable').on('dragstart', function(event) {
     $(this).addClass('is-dragging');
@@ -9,6 +10,7 @@ $('.draggable').on('dragstart', function(event) {
 
     $('.draggable').on('dragend', function() {
         $('.draggable').removeClass('is-dragging');
+
 
     });
     $('.droppable').on('dragover', function(event) {

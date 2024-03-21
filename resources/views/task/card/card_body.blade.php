@@ -1,22 +1,22 @@
-<div class="wrapper row container"> 
+<div class="wrapper row container">
     <div class="header row col-12">
         <div class="col-12 d-flex">
             <span><ion-icon name="card-outline"></ion-icon> </span>
             <h6>Project planning</h6>
-        </div> 
+        </div>
         <div class="col-12">
             <small>in list <span class="fw-bold">Doing</span></small>
 
         </div>
-     
-        
+
+
         {{-- <h5 class="h5 "><ion-icon name="card-outline"></ion-icon> Project planning</h5>
         <small>in list <span class="fw-bold">Doing</span></small> --}}
     </div>
-    <div class="col-9  ">
+    <div class="col-9">
         <div class="card-details col-12">
             <div class="members-in-task d-inline-block   mr-3">
-                <p class="py-0 my-1">Members</p> 
+                <p class="py-0 my-1">Members</p>
                 <div class="d-flex align-items-center">
                     <span class="avatar mr-2">
                        <strong class="align-middle" style="vertical-align: middle"> AD </strong>
@@ -27,19 +27,19 @@
                 </div>
             </div>
             <div class="card-labels  d-inline-block   mr-3">
-                
-                <p class="py-0 my-1 ">Labels</p> 
+
+                <p class="py-0 my-1 ">Labels</p>
                 <div class=" d-flex my-auto">
                     <li class="list-unstyled bg-success  rounded rounded-2 py-1 px-3 mr-2">Label</li>
                     <span class="font-16 d-inline-block  bg-secondary-subtle">
                         <ion-icon name="add-outline"></ion-icon>
                     </span>
                 </div>
-                
+
 
             </div>
             <div class="notify  d-inline-block  mr-3">
-                <p class="py-0 my-1">Notifications</p> 
+                <p class="py-0 my-1">Notifications</p>
                 <div class="">
                     <span class="notify-btn btn btn-secondary p-1">
                         <ion-icon name="eye-outline"></ion-icon>  Watch
@@ -110,7 +110,7 @@
                 <ul class="activity-stream p-0 m-0 ">
                     <li >
                         <span class=" avatar bg-secondary text-center">AD</span>
-                           
+
                             <input class="form-control mx-2" placeholder="Write Comment... "></p>
                     </li>
                     <li>
@@ -140,13 +140,13 @@
                 <div class="bg-secondary-subtle border rounded rounded-4 m-0 py-2 my-1 dropdown">
                     <span class="mx-2 "><ion-icon name="person-outline"></ion-icon> </span>
                     <span class="dropdown-toggle"   id='membersToggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > Members</span>
-                    <div class="dropdown-menu  fit-content members-list" aria-labelledby="membersToggle">
+                    <div class="dropdown-menu  fit-content-w members-list" aria-labelledby="membersToggle">
                         <div class="dropdown-title text-center ">Members</div>
                         <input type="text" name="" class="col" id="">
                         <p class="dropdown-title  text-left p-0 m-0 fw-bold">Card Members</p>
                         <a class="dropdown-item p-0 m-0 py-1 d-flex align-items-center" href="#"><span class="mx-2 avatar">JA</span>Jahangir Shah</a>
                         <p class="dropdown-title text-left p-0  m-0 fw-bold">Board Members</p>
-                        
+
                         <a class="dropdown-item p-0 m-0 py-1 d-flex align-items-center" href="#"><span class="mx-2 avatar">JA</span>Ala Shah</a>
 
                         <a class="dropdown-item p-0 m-0 py-1 d-flex align-items-center" href="#"><span class="mx-2 avatar">JA</span>Asif shahid</a>
@@ -155,11 +155,11 @@
                 </div>
             </li>
             <li class="sidebar-items">
-    
+
                 <div class="bg-secondary-subtle border rounded rounded-4 m-0 py-2 my-1 dropdown">
                     <span class="mx-2 "><ion-icon name="checkbox-outline"></ion-icon> </span>
                     <span class="dropdown-toggle"   id='labelsToggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > Labels</span>
-                    <div class="dropdown-menu  fit-content members-list" aria-labelledby="labelsToggle">
+                    <div class="dropdown-menu  fit-content-w members-list" aria-labelledby="labelsToggle">
                         <div class="dropdown-title text-center ">Labels</div>
                         <input type="text" name="" class="col" id="">
                         <p class="dropdown-title  text-left p-0 m-0 fw-bold">Card Members</p>
@@ -168,7 +168,7 @@
                                 <span> <input type="checkbox" name="" id="label-item"></span>
                                 <label for="label-item" class="col">Important</label>
                                 <span class="float-right font-12"><ion-icon name="eyedrop-outline"></ion-icon></span>
-                            </div>    
+                            </div>
                         </a>
                        <button class="btn mx-auto">
                         Create new label

@@ -50,9 +50,34 @@
 
 <!-- Your HTML form goes here -->
 
+
+<!-- Your HTML form goes here -->
+
 <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
+        @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible fade show fixed-top" role="alert">
+            <strong> {{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+    @endif
+
+    @if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show fixed-top" role="alert">
+        @foreach ($errors->all() as $error)
+        <strong> {{ $error }}</strong>
+    @endforeach
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    @endif
         @if(Session::has('success'))
         <div class="alert alert-success alert-dismissible fade show fixed-top" role="alert">
             <strong> {{ Session::get('success') }}</strong>
@@ -81,7 +106,9 @@
         <!-- Start main left sidebar menu -->
         @include('slice.sidebar')
 
+
         <!-- Start app main Content -->
+
 
 
         <div class="main-content" style="min-height: 456px;">
@@ -90,6 +117,7 @@
 
         <!-- Start app Footer part -->
         @include('slice.footer')
+
 
     </div>
 </div>
@@ -123,6 +151,8 @@
 <!-- Template JS File -->
 <script src="{{asset('assets/js/scripts.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="{{asset('assets/js/ajax/ajax.js')}}"></script>
+
 <script src="{{asset('assets/js/ajax/ajax.js')}}"></script>
 
 {{-- ion icons --}}

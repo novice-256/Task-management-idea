@@ -1,4 +1,5 @@
-
+var folderName = "";
+const baseUrl =  window.location.protocol + "//" + window.location.hostname;
   // update  tag stage
   $('.draggable').on('dragend', function() {
     let id = 1;

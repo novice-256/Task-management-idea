@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('task_limit')->nullable();
             $table->integer('assigned_by');
             $table->string('task_color')->default('#b52f2f');
-            $table->integer('has_labels')->default(0);
+            $table->integer('label')->default(0);
             $table->string('stage')->default('initial');
             $table->timestamps();
         });

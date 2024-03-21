@@ -3873,7 +3873,7 @@ body.layout-4 .main-sidebar .sidebar-menu li.dropdown.active>a {
 
 body.layout-4 .main-content,
 body.layout-4 .main-footer {
-    padding-left: 300px
+    padding-left: 300px !important
 }
 
 body.layout-4 .section .section-header {
@@ -6754,10 +6754,12 @@ ul {
 
 button {
     padding: .2rem 1rem !important;
+
 }
 
 ion-icon {
     cursor: pointer;
+
 }
 
 .sidebar-list li {

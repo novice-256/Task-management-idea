@@ -11,8 +11,7 @@
         </div>
 
         <div class="section-body">
-
-            <form id="add-project-form" action="http://127.0.0.1:8000/project/store" method="POST">
+            <form id="add-project-form" action="{{url('project/store')}}" method="POST">
                 @csrf
                     <div class="col-12">
                         <div class="card-body">
@@ -87,7 +86,6 @@
                             <div class="col-sm-12 col-md-7">
                                 <button class="btn btn-primary">Add Project</button>
                             </div>
-
                         </div>
                     </div>
             </form>
@@ -182,9 +180,11 @@
             $('#add-project-form').hide()
             $('#add-project').on('click', () => {
                 $('#add-project-form').toggle( { direction: "bottom" }, 1000);
+                $('.navbar').addClass('z-index-1')
             })
             $('#close-form').on('click', () => {
                 $('#add-project-form').toggle( { direction: "bottom" }, 1000);
+                $('.navbar').removeClass('z-index-1')
             })
             // $('body').on('click',()=>{
             //     let formOverlay=$('#add-project-form')
