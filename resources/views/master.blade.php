@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+<meta name="domain" content="{{ request()->getHost() }}">
+<meta name="author" content="YourName">
+<meta name="description" content="Brief description of your domain">
+<meta name="keywords" content="keywords, related, to, your, domain">
+<meta name="robots" content="index, follow">
 <title>Task Management</title>
 
 <!-- General CSS Files -->
@@ -39,26 +44,50 @@
     <span class="loader"><span class="loader-inner"></span></span>
 </div>
 
+
+<!-- Your HTML form goes here -->
+
 <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
-        
+        @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissible fade show fixed-top" role="alert">
+            <strong> {{ Session::get('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+    @endif
+
+    @if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show fixed-top" role="alert">
+        @foreach ($errors->all() as $error)
+        <strong> {{ $error }}</strong>
+    @endforeach
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    @endif
         <!-- Start app top navbar -->
         @include('slice.header')
 
         <!-- Start main left sidebar menu -->
         @include('slice.sidebar')
-      
+
         <!-- Start app main Content -->
 
-        
+
         <div class="main-content" style="min-height: 456px;">
            @yield('content')
         </div>
 
         <!-- Start app Footer part -->
         @include('slice.footer')
-       
+
     </div>
 </div>
 
@@ -91,6 +120,8 @@
 <!-- Template JS File -->
 <script src="{{asset('assets/js/scripts.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="{{asset('assets/js/ajax/ajax.js')}}"></script>
+
 {{-- ion icons --}}
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

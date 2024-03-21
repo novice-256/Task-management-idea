@@ -1,10 +1,16 @@
 @extends('master')
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="section-body task-main  h-100  ">
         {{-- task area top --}}
-        <div class="w-100 p-3 d-flex justify-content-around align-items-center" style="background: #3b3d5599">
+        <div class="w-100 p-3 d-flex justify-content-around align-items-center" style="background:#0000003d">
             <div class="project-title text-dark">
-                <h5 class="h5 text-white">Project Management</h5>
+                <h5 class="h5 text-white">{{$project->project_name}}</h5>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-primary mx-auto" id="show-task-form">Add Task</button>
+                @include('task.task_form')
+
             </div>
             <div class=" col justify-content-end d-flex ">
                 <div class="dropdown">
@@ -48,7 +54,6 @@
                     <span class="bg-transparent  dropdown-toggle text-white" type="button" id="setting-dropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-
                     </span>
                     <div class="dropdown-menu" aria-labelledby="setting-dropdown">
                         <a class="dropdown-item" href="#">Action</a>
@@ -57,16 +62,14 @@
                     </div>
                 </span>
             </div>
-
-
         </div>
-
         <div class="card-group">
             <div class="card col-3 h-50 m-3 border shadow shadow-md">
                 <div class="card-header d-block positon-relative border-0 py-0 px-2 pt-3 text-capitalize">
-                    <h5 class="h5 col py-2 ">header
+                    <h5 class="h5 col py-2 ">
+                        <span contenteditable class="m-0 d-inline-block col-10">header</span>
+                        {{-- working here --}}
                         <span class="float-right  px-1 toggle-setting  ">
-
                             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                         </span>
                     </h5>
@@ -93,7 +96,7 @@
                 </div>
                 <div class="card-body task-parent p-0">
                     <ul class="droppable   list-group">
-                        <li class="draggable task-radius list-item p-0 my-4 " draggable="true">
+                        <li class="draggable task-radius list-item p-0 my-2 " data-task-id="1" data-task-stage="initial" draggable="true">
                             {{-- sub-task card start --}}
                             <div class="card sub-task  ">
                                 <div class="task-overlay d-none p-1  "data-toggle="modal" data-target="#card-setting-modal">
@@ -155,8 +158,9 @@
                                     </div>
                                 </div>
                             </div>
+
                         </li>
-                        <li class="draggable task-radius list-item p-0 my-4 " draggable="true">
+                        <li class="draggable task-radius list-item p-0 my-2 " draggable="true">
                             {{-- sub-task card start --}}
                             <div class="card sub-task  ">
                                 <div class="task-overlay d-none p-1 ">
@@ -203,13 +207,32 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="position-relative draggable not-placeable">
+                            <div class="card col h-50  border shadow-md ">
+                                <p class="py-2 btn text-dark my-auto d-flex align-items-center justify-content-start add-new-task">
+                                    <span class="font-14 mx-2"><ion-icon name="add-outline"></ion-icon></span>
+                                    <span class="">Add a Card</span>
+                                </p>
+                            </div>
+                            {{-- hidden form --}}
+                            <div class="card col fit-content border shadow-md px-1 py-2 position-absolute top-0 left-0 card-title-form" style="display: none;">
+                                <input type="text" name="" class="form-control" value="1" disabled hidden>
+                                <input type="text" name="" class="form-control" id="card-title" placeholder="Enter a title for this card...">
+                                <div class="my-2">
+                                    <span class="btn btn-primary add-card">Add card</span>
+                                    <span class="btn font-14 close-title-form"><ion-icon name="close-outline"></ion-icon></span>
+                                </div>
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>
             <div class="card col-3 h-50 m-3 border shadow-md">
                 <div class="card-header border-0 py-0 px-2 pt-3 text-capitalize">
 
-                    <h5 class="h5 col py-2">header
+                    <h5 class="h5 col py-2">
+                        <span contenteditable>header</span>
                         <span class="float-right mr-2 px-2">
                             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
                         </span>
@@ -217,7 +240,7 @@
                 </div>
                 <div class="card-body p-1">
                     <ul class="droppable  list-group ">
-                        <li class="draggable task-radius list-item p-0 my-4  positions-relative" draggable="true">
+                        <li class="draggable task-radius list-item p-0 my-2  positions-relative" draggable="true">
                             {{-- sub-task card start --}}
                             <div class="card sub-task  ">
                                 <div class="task-overlay d-none p-1 ">
@@ -272,15 +295,12 @@
                     </ul>
                 </div>
             </div>
+
         </div>
-
-
-
        <div class="modal fade" id="card-setting-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered w-100 justify-content-center d-flex " role="document">
               <div class="modal-content " id="card-setting-main">
                 <div class="modal-header d-flex  p-3 m-0 py-5 bg-info position-relative text-white">
-                  <h5 class="modal-title mx-2 " id="exampleModalLongTitle">Modal title</h5>
                   <button type="button" class="close  position-absolute top-0  text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -291,11 +311,11 @@
                 </div>
                 <div class="modal-body">
                         {{-- main --}}
-         @include('task.card.card_body') 
+         @include('task.card.card_body')
        </div>
               </div>
             </div>
-          </div> 
+          </div>
         {{-- <div class="modal fade show" id="card-setting-modal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" style="display: block;">
             <div class="modal-dialog modal-dialog-centered w-100 justify-content-center d-flex " role="document">
@@ -319,5 +339,5 @@
                     </div>
                 </div>
             </div>
-        </div> --}} 
+        </div> --}}
     @endsection

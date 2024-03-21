@@ -7,7 +7,7 @@
         </ul>
         <div class="search-element">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
-            <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            <button class="btn py-2 border border-light" type="submit"><i class="fas fa-search"></i></button>
             <div class="search-backdrop"></div>
             <div class="search-result">
                 <div class="search-header">Histories</div>
@@ -26,23 +26,23 @@
                 <div class="search-header">Result</div>
                 <div class="search-item">
                     <a href="#">
-                        <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png"
-                            alt="product">
-                        oPhone 11 Pro
+                        {{-- <img class="mr-3 rounded" width="30" src="assets/img/products/product-3-50.png" --}}
+                            {{-- alt="product"> --}}
+                        {{-- oPhone 11 Pro --}}
                     </a>
                 </div>
                 <div class="search-item">
                     <a href="#">
-                        <img class="mr-3 rounded" width="30" src="assets/img/products/product-2-50.png"
-                            alt="product">
-                        Drone Zx New Gen-3
+                        {{-- <img class="mr-3 rounded" width="30" src="assets/img/products/product-2-50.png" --}}
+                            {{-- alt="product"> --}}
+                        {{-- Drone Zx New Gen-3 --}}
                     </a>
                 </div>
                 <div class="search-item">
                     <a href="#">
-                        <img class="mr-3 rounded" width="30" src="assets/img/products/product-1-50.png"
-                            alt="product">
-                        Headphone JBL
+                        {{-- <img class="mr-3 rounded" width="30" src="assets/img/products/product-1-50.png" --}}
+                            {{-- alt="product"> --}}
+                        {{-- Headphone JBL --}}
                     </a>
                 </div>
                 <div class="search-header">Projects</div>
@@ -64,6 +64,48 @@
         </div>
     </form>
     <ul class="navbar-nav navbar-right">
+        <li class="">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle d-flex align-items-center bg-secondary-subtle border shadow add-user-btn"  data-toggle="dropdown"><span class="font-14 d-flex mr-1"><ion-icon name="add-outline"></ion-icon></span>Add User</button>
+                <div class=" dropdown-menu add-user-form " >
+                    <div class="section-body  dropdown-item">
+                        {!! Form::open(['url' => 'users/store']) !!}
+                        <div class="card-body">
+                            <div class="form-group">
+                                {!! Form::label('role_id', 'Select Role') !!}
+                                {!! Form::select('role_id', ['1' => 'HR', '2' => 'Development', '3' => 'Accounts'], null, ['class' => 'form-control']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('name', 'User Name') !!}
+                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Enter user name']) !!}
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('email', 'Email') !!}
+                                {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => 'Enter email']) !!}
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('password', 'Password') !!}
+                                {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Enter password']) !!}
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            {!! Form::submit('Add User', ['class' => 'btn btn-primary']) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    </div>
+                </div>
+            </div>
+
+
+        </li>
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -75,7 +117,7 @@
                 <div class="dropdown-list-content dropdown-list-message">
                     <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
+                            {{-- <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle"> --}}
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
@@ -86,7 +128,7 @@
                     </a>
                     <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle">
+                            {{-- <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle"> --}}
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Dedik Sugiharto</b>
@@ -96,7 +138,7 @@
                     </a>
                     <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle">
+                            {{-- <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle"> --}}
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
@@ -107,7 +149,7 @@
                     </a>
                     <a href="#" class="dropdown-item">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle">
+                            {{-- <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle"> --}}
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Ardian Rahardiansyah</b>
@@ -117,7 +159,7 @@
                     </a>
                     <a href="#" class="dropdown-item">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle">
+                            {{-- <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle"> --}}
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Alfa Zulkarnain</b>
@@ -192,7 +234,7 @@
         </li>
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                {{-- <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1"> --}}
                 <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
