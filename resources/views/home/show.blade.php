@@ -21,15 +21,31 @@
                             <div class="form-group">
                                 <label>Select Role</label>
                                 <select class="form-control" name="user_role_id">
-                                    <option value="1">HR</option>
-                                    <option value="2">Developement</option>
-                                    <option value="3">Accounts</option>
+                                    @forelse ($role as $item)
+
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+
+                                    @empty
+                                    <option >You need to create roles</option>
+
+                                    @endforelse
                                 </select>
                             </div>
                             <div class="form-group">
 
                                 <label for="project_name">Project Name</label>
                                 <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Enter project name">
+                            </div>
+                            <div class="form-group">
+                            <div id="selected-items" class=" d-flex py-2 text-capitalize"></div>
+                                <label for="project_stage">Stages</label>
+                              <input type="text" name="stages" value="" id="selected" hidden >
+                                <div class="d-flex">
+                                    <div class="col-10">
+                                        <input type="text" class="form-control" id="project_stage" name="project_stage" placeholder="Enter project name">
+                                    </div>
+                                    <span class="btn font-14" id="add-stages"><ion-icon name="add-outline"></ion-icon></span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="thumbnail">Thumbnail</label>
@@ -186,14 +202,33 @@
                 $('#add-project-form').toggle( { direction: "bottom" }, 1000);
                 $('.navbar').removeClass('z-index-1')
             })
-            // $('body').on('click',()=>{
-            //     let formOverlay=$('#add-project-form')
-            //     if(formOverlay.is(':visible')){
 
-            //         formOverlay.toggle()
-            //     }
 
-            // })
+            $('#add-stages').click(function() {
+        var projectStage = $('#project_stage').val().trim();
+        if (projectStage !== '') {
+
+           let selected=  $('#selected').val() ;
+           if( $('#selected').val() ===""){
+            $('#selected').val((projectStage))
+
+        }else{
+
+            $('#selected').val((selected + "," + projectStage))
+        }
+
+
+            // Clear the project name input
+            $('#project_stage').val('');
+            let val=  $('#selected').val()
+            let arr = val.split(',')
+           let selectedHtml  =arr.map(item => {
+                 return`<span class="mx-2 bg-light p-1 rounded">${item}</span>`
+            });
+            $('#selected-items').html(selectedHtml)
+        }
+    });
+
         })
     </script>
 @endsection

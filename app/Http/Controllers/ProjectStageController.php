@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\Models\UserRole;
+use App\Models\ProjectStage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class ProjectStageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,29 +28,21 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(ProjectStage $projectStage)
     {
-        $show = Project::get();
-        $show_my_project = Project::select('projects.*','users.id','users.name as user_name','user_roles.*')
-        ->join('user_roles','user_roles.id','=','projects.user_role_id')
-        ->join('users','users.role_id','=','projects.user_role_id')
-        ->get();
-        $role = UserRole::get();
-        return view('home.show',compact('show','show_my_project','role'));
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Project $project)
+    public function edit(ProjectStage $projectStage)
     {
         //
     }
@@ -60,7 +50,7 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, ProjectStage $projectStage)
     {
         //
     }
@@ -68,7 +58,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy(ProjectStage $projectStage)
     {
         //
     }

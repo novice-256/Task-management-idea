@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\ProjectStage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,22 +36,34 @@ class ProjectController extends Controller
             'bg_color' => 'nullable|string|max:50',
             'task_limit' => 'nullable|integer',
             'user_role_id' => 'nullable|integer',
+            'stages'=>'required'
         ]);
-        
+
         $project = Project::create([
             'user_role_id' => $data['user_role_id'],
             'project_name' => $data['project_name'],
             'thumbnail' => $data['thumbnail'] ?? 'project-thumbnail.png',
             'bg_color' => $data['bg_color'],
             'task_limit' => $data['task_limit'],
-            'created_by' =>Auth::user()->role_id,  
+            'created_by' =>Auth::user()->role_id,
         ]);
 
         if (!$project) {
             return back()->with('error','Failed to Create Resource');
         }
-        return back()->with('success','Created Successfully');
+        $project = Project::select('id')->where('project_name', $data['project_name'])->first();
+        $curr_project = $project->id;
+        $stages_arr =explode( ",",$data['stages'] );
+        foreach ($stages_arr as $stage ) {
+           ProjectStage::insert([
+            'name'=>$stage,
+            'project_id'=> $curr_project
+           ]);
+        }
         
+        dd($stages_arr);
+        return back()->with('success','Created Successfully');
+
     }
 
     /**
@@ -58,7 +71,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        
+
     }
 
     /**

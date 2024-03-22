@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserRoleController extends Controller
 {
@@ -28,7 +29,20 @@ class UserRoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+        $create_role =UserRole::create(
+           [ 'name'=> $validate['name']]
+
+        );
+        if(!$create_role ){
+            Session::flash('error', 'fail to create Role!');
+            return redirect()->back();
+        }
+        Session::flash('success', 'Role created successfully!');
+        return redirect()->back();
+
     }
 
     /**
@@ -36,7 +50,8 @@ class UserRoleController extends Controller
      */
     public function show(UserRole $userRole)
     {
-        //
+        $show = UserRole::get();
+        return view('role.show', compact('show'));
     }
 
     /**
@@ -58,8 +73,15 @@ class UserRoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserRole $userRole)
+    public function destroy(UserRole $userRole ,$id)
     {
-        //
+       $role =  UserRole::find($id);
+       $delete_role= $role->delete();
+       if(!$delete_role){
+        Session::flash('error', 'fail to delete Role!');
+        return redirect()->back();
+    }
+    Session::flash('success', 'Role delete successfully!');
+    return redirect()->back();
     }
 }

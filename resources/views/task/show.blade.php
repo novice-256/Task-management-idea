@@ -15,7 +15,7 @@
         {{-- task area top --}}
         <div class="w-100 p-3 d-flex justify-content-around align-items-center" style="background:#0000003d">
             <div class="project-title text-dark">
-                <h5 class="h5 text-white">{{$project->project_name}}</h5>
+                <h5 class="h5 text-white">{{$project && $project->project_name}}</h5>
             </div>
             <div class="col d-flex justify-content-center">
                 <button class="btn btn-primary mx-auto" id="show-task-form">Add Task</button>
@@ -333,7 +333,7 @@
                 </div>
               </div>
             </div>
-          </div>  
+          </div>
         {{-- <div class="modal fade show" id="card-setting-modal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" style="display: block;">
             <div class="modal-dialog modal-dialog-centered w-100 justify-content-center d-flex " role="document">

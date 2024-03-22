@@ -6784,5 +6784,5 @@ ion-icon {
 }
 
 html{
-    zoom: 95%;
+    zoom: 95% !important;
 }

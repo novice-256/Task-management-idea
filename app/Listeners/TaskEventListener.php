@@ -29,11 +29,11 @@ class TaskEventListener
         $task =  $taskEvents->task;
         $userId = Auth::user()->id;
         $eventName = (new ReflectionClass($task))->getShortName();
-        Notification::create([
-            'user_id' => $userId,
-            'name' => 'task.' . $eventName,
-            'data' => json_encode(['task_id' => $task->id]),
-        ]);
+        // Notification::create([
+        //     'user_id' => $userId,
+        //     'name' => 'task.' . $eventName,
+        //     'data' => json_encode(['task_id' => $task->id]),
+        // ]);
 
     }
 }

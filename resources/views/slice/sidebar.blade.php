@@ -23,13 +23,13 @@
                 <ul class="dropdown-menu" style="display: none;">
                 <li class="menu-sub-header">View</li>
 
-                    <li><a class="nav-link" href="layout-default.html">My Projects</a></li>
+                <li><a class="nav-link" href="{{url('project/show')}}">My Projects</a></li>
 
 
-                    <li><a class="nav-link" href="layout-top-navigation.html">My Tasks</a></li>
+                    <li><a class="nav-link" href="{{url('task/show')}}">My Tasks</a></li>
                 </ul>
             </li>
-          
+
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>User and Roles</span></a>
                 <ul class="dropdown-menu" style="display: none;">
@@ -37,7 +37,7 @@
 
                     <li><a class="nav-link" href="{{url('users/show')}}">Users</a></li>
 
-                    <li><a class="nav-link" href="{{url('roles/show')}}">Roles</a></li>
+                    <li><a class="nav-link" href="{{url('role/show')}}">Roles</a></li>
                     <li><a class="nav-link" href="{{url('permission/show')}}">Permission</a></li>
                 </ul>
             </li>

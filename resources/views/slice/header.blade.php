@@ -1,3 +1,8 @@
+@php
+
+        $role = DB::table('user_roles')->pluck('name','id');
+
+@endphp
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
         <ul class="navbar-nav mr-3">
@@ -83,7 +88,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 {!! Form::label('role_id', 'Select Role') !!}
-                                {!! Form::select('role_id', ['1' => 'HR', '2' => 'Development', '3' => 'Accounts'], null, ['class' => 'form-control']) !!}
+                                {!! Form::select('role_id', $role,null ,['class'=>'form-control']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('name', 'User Name') !!}
@@ -113,8 +118,6 @@
                     </div>
                 </div>
             </div>
-
-
         </li>
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>

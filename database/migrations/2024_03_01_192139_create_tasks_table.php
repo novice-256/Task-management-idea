@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('assigned_by');
             $table->string('task_color')->default('#b52f2f');
             $table->integer('label')->default(0);
-            $table->string('stage')->default('initial');
+            $table->string('project_stage_id')->default(1);
             $table->timestamps();
         });
     }

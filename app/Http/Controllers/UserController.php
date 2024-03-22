@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 class UserController extends Controller
@@ -27,27 +28,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate incoming data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
-            // 'role_id' => 'required|exists:roles,id',
             'role_id' => 'required',
         ]);
-
-        // Insert data into the database
-        $user = new User();
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->password = bcrypt($validatedData['password']);
-        $user->role_id = $validatedData['role_id'];
-        $user->save();
-
-        // Success message
+        // dd($validatedData['role_id']);
+        $create_user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'role_id' => $validatedData['role_id'],
+        ]);
+        if(!$create_user ){
+            Session::flash('error', 'fail to create User!');
+            return redirect()->back();
+        }
         Session::flash('success', 'User created successfully!');
 
-        // Redirect back to the form or any other route
         return redirect()->back();
     }
 
@@ -57,8 +56,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        $show = User::get();
-        return view('user.show',compact('show'));
+        $show = User::select('users.*','user_roles.name as role')
+                ->join('user_roles','user_roles.id','=','users.role_id')
+                ->get();
+        $role = UserRole::pluck('name','id');
+        return view('user.show',compact('show','role'));
     }
 
     /**
@@ -74,7 +76,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $create_user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role_id
+        ]);
     }
 
     /**

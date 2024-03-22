@@ -38,12 +38,14 @@ Route::prefix('users')->group(function()  {
     Route::get('show',[UserController::class,'show']);
     Route::get('create',[UserController::class,'create']);
     Route::post('store',[UserController::class,'store']);
+    Route::post('delete',[UserController::class,'destroy']);
 });
 // Role
-Route::prefix('user')->group(function()  {
+Route::prefix('role')->group(function()  {
     Route::get('show',[UserRoleController::class,'show']);
     Route::get('create',[UserRoleController::class,'create']);
     Route::post('store',[UserRoleController::class,'store']);
+    Route::get('delete/{id}',[UserRoleController::class,'destroy']);
 });
 Route::get('drag',function(){return view('task.drag');});
 

@@ -75,7 +75,7 @@ $(() => {
                 }
             });
         });
-    
+
         $(document).on('click', ".show-checked", function () {
             console.log('ok');
             $(".check-list li").show();
@@ -83,9 +83,10 @@ $(() => {
             $(this).text('Show Checked Items');
         });
 });
+// fix overlapping
 
 /**
- * Helper function to avoid repetition 
+ * Helper function to avoid repetition
  */
 
 // Resuable toggle function
