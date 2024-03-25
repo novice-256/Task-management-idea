@@ -9,6 +9,8 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AssignedTask;
+use App\Models\Labels;
+
 class ProjectController extends Controller
 {
     /**
@@ -62,7 +64,6 @@ class ProjectController extends Controller
             'project_id'=> $curr_project
            ]);
         }
-        // dd($stages_arr);
         return back()->with('success','Created Successfully');
 
     }
@@ -72,21 +73,25 @@ class ProjectController extends Controller
      */
     public function show(Project $project ,$id)
     {
-        
-    $show = Task::where('project_id',$id);
-    $labels=  $show->pluck('label')??null;
 
-    $labels=  json_decode($labels)[0] ?? null;
-    $task_id=  $show->pluck('id')[0] ??null;
-    $show = $show->get();
-    $assigned_people= AssignedTask::select('users.name')
-    ->join('users','assigned_tasks.user_id','=','users.id')
-    ->where('task_id', $task_id )->get();
+        $task = Task::select('tasks.*', 'tasks.id as task_id', 'users.id as user_id', 'users.name', 'assigned_tasks.id as assign_id')
+        ->leftJoin('assigned_tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
+        ->leftJoin('users', 'assigned_tasks.user_id', '=', 'users.id')
+        ->where('project_id', $id)
+        ->get();
+    $labels = Labels::select('labels.*', 'labels.id as label_id', 'tasks.id as task_id')
+        ->leftJoin('tasks', 'labels.task_id', '=', 'tasks.id')
+        ->where('tasks.project_id', $id)
+        ->get();
+    $assignedTaskMembers = AssignedTask::select('assigned_tasks.*', 'tasks.id as task_id', 'users.id as     user_id', 'users.name')
+        ->leftJoin('tasks', 'assigned_tasks.task_id', '=', 'tasks.id')
+        ->leftJoin('users', 'assigned_tasks.user_id', '=', 'users.id')
+        ->where('tasks.project_id', $id)
+        ->get();
     $project = Project::where('id','=',$id)->first();
-    $stages= ProjectStage::where('project_id',$id)->get();    
-     $task= Task::where('project_id',$id)->get();
-        // TaskEvents::dispatch($task);
-        return view('project.show',compact('show' ,'assigned_people' ,'labels','project','stages' ,'task'));
+    $stages= ProjectStage::where('project_id',$id)->get();
+
+        return view('project.show',compact('project','stages','task','labels','assignedTaskMembers'));
 
     }
 

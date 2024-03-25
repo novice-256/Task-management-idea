@@ -3,47 +3,47 @@
  * because it will make it harder for you to update.
  */
 /*
-        Home script 
+        Home script
 */
- 
-$(() => {
-    $('#add-project-form').hide()
-    $('#add-project').on('click', () => {
-        console.log();
-        $('#add-project-form').toggle( { direction: "bottom" }, 1000);
-        $('.navbar').addClass('z-index-1')
-    })
-    $('#close-form').on('click', () => {
-        $('#add-project-form').toggle( { direction: "bottom" }, 1000);
-        $('.navbar').removeClass('z-index-1')
-    })
-    $('#add-stages').click(function() {
-var projectStage = $('#project_stage').val().trim();
-if (projectStage !== '') {
 
-   let selected=  $('#selected').val() ;
-   if( $('#selected').val() ===""){
-    $('#selected').val((projectStage))
+// $(() => {
+//     $('#add-project-form').hide()
+//     $('#add-project').on('click', () => {
+//         console.log();
+//         $('#add-project-form').toggle( { direction: "bottom" }, 1000);
+//         $('.navbar').addClass('z-index-1')
+//     })
+//     $('#close-form').on('click', () => {
+//         $('#add-project-form').toggle( { direction: "bottom" }, 1000);
+//         $('.navbar').removeClass('z-index-1')
+//     })
+//     $('#add-stages').click(function() {
+// var projectStage = $('#project_stage').val().trim();
+// if (projectStage !== '') {
 
-}else{
+//    let selected=  $('#selected').val() ;
+//    if( $('#selected').val() ===""){
+//     $('#selected').val((projectStage))
 
-    $('#selected').val((selected + "," + projectStage))
-}
+// }else{
 
-/*
-        Clear the project name input
-  */  
-    $('#project_stage').val('');
-    let val=  $('#selected').val()
-    let arr = val.split(',')
-   let selectedHtml  =arr.map(item => {
-         return`<span class="mx-2 bg-light p-1 rounded">${item}</span>`
-    });
-    $('#selected-items').html(selectedHtml)
-}
-    });
+//     $('#selected').val((selected + "," + projectStage))
+// }
 
-})
+// /*
+//         Clear the project name input
+//   */
+//     $('#project_stage').val('');
+//     let val=  $('#selected').val()
+//     let arr = val.split(',')
+//    let selectedHtml  =arr.map(item => {
+//          return`<span class="mx-2 bg-light p-1 rounded">${item}</span>`
+//     });
+//     $('#selected-items').html(selectedHtml)
+// }
+//     });
+
+// })
 
 
 $(() => {
@@ -81,7 +81,7 @@ $(() => {
         $('#label-data').append(labelBadge);
         $('#label_name').val('');
     });
- 
+
     // $('add-user-btn').on('click');
 
         // Toggle checked items in task list
@@ -105,25 +105,37 @@ $(() => {
 });
 
     // Task toggler
-    export function task_card_script(){ 
+    export function task_card_script(){
         $('.task-label li strong').toggle();
         simpleToggle('.add-sub-task', '.toggle-sub-task', 'top');
         simpleToggle('.task-label', 'li strong', '');
         simpleToggle('.task-label', 'li', { class: 'col w-auto', direction: 'right' });
-    
+
         $('.add-new-task').click(function () {
-            $(this).closest('.position-relative').find('.add-new-task').hide();
-            $(this).closest('.position-relative').find('.card-title-form').show();
-            $(this).closest('.position-relative').addClass('pb-5');
+            $(this).closest('li').find('.add-new-task').hide();
+            $(this).closest('li').find('.card-title-form').show();
+            $(this).closest('li').addClass('pb-5');
         });
-    
+
         $('.close-title-form').click(function () {
-            $(this).closest('.position-relative').find('.card-title-form').hide();
-            $(this).closest('.position-relative').find('.add-new-task').show();
-            $(this).closest('.position-relative').removeClass('pb-5');
+            $(this).closest('li').find('.project-stage-form').hide();
+            $(this).closest('li').find('.add-new-task').show();
+            $(this).closest('li').removeClass('pb-5');
         });
-    } 
-    
+        $('.add-new-stage').on('click',function () {
+            $(this).removeClass('d-flex');
+            $(this).closest('li').find('.project-stage-form').show();
+            $(this).closest('li').addClass('pb-5');
+        });
+
+        $('.close-title-form').on('click',function () {
+            $(this).closest('li').find('.project-stage-form').hide();
+            $('.add-new-stage').addClass('d-flex');
+            $(this).closest('li').removeClass('pb-5');
+        });
+
+    }
+
 // fix overlapping
 
 /**

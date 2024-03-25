@@ -1368,7 +1368,7 @@ table tr:hover .table-links {
 .modal-body,
 .modal-footer {
     padding: 25px
-    
+
 }
 
 .modal-body {
@@ -6551,7 +6551,7 @@ html {
 
 .is-dragging {
     background-color: gray;
-    opacity: .9;
+    opacity: .5;
 }
 
 .task-radius {
@@ -6767,8 +6767,11 @@ ion-icon {
     cursor: pointer;
 }
 
-.fit-content {
+.fit-content-w {
     width: fit-content !important;
+}
+.fit-content {
+    height: fit-content !important;
 }
 
 .members-list {
@@ -6811,4 +6814,21 @@ html{
     min-width: 300px !important;
     padding: 0;
     margin-top: 2%;
+}
+
+.overflow-x{
+    overflow-x: scroll;
+}
+
+.overflow-y{
+    overflow-x: scroll;
+}
+.overflow-x-none{
+    overflow-x: visible;
+}
+.overflow-y-none{
+    overflow-y: visible;
+}
+#task-card-wrapper{
+
 }

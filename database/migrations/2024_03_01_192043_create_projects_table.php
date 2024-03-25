@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('user_role_id');
             $table->string('project_name');
-            $table->string('project_stage_id');
             $table->string('thumbnail')->default('project-thumbnail.png');
             $table->string('bg_color')->nullable();
             $table->integer('task_limit')->nullable();

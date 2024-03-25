@@ -2,25 +2,32 @@ import {task_card_script} from '../custom.js'
 import {task_move} from '../DragTask.js'
 task_move()
 task_card_script()
+ajaxOntaskMove()
 var folderName = "";
 var baseUrl = window.location.protocol + "//" + window.location.hostname;
-// update  tag stage
-$('.draggable').on('dragend', function () {
 
+// Update task Stage on Drag
+function ajaxOntaskMove() {
+$('.draggable').on('dragend', function () {
   let taskId = $(this).attr('data-task-id');
-  let taskStage = $(this).attr('data-task-stage');
+  let taskStage = $(this).closest('ul').attr('data-task-stage');
   let _token = $('meta[name="csrf-token"]').attr('content');
-  let url = baseUrl + ":8000/api/task/move";
-  ajaxCRUD("PUT", url, { taskId, taskStage }, _token, (response) => {
+  let projectId = $('h5[data-project-id]').attr('data-project-id')
+  let url = baseUrl + ":8000/api/task/move/"+taskId;
+  ajaxCRUD("PUT", url, { projectId, taskStage }, _token, (response) => {
     console.log(response);
+    if (response.success) {
+        let projectUrl = baseUrl + ":8000/project/show/"+projectId
+        reloadTaskCards(projectUrl)
+    }
   });
 });
-
+ }
 /**
- *        Card Body 
+ *       Task Cards
  */
+//  Create New Task Card
 $(() => {
-
   $(document).on('click','.add-card', function (e) {
     console.log('clicked');
     e.preventDefault();
@@ -29,36 +36,71 @@ $(() => {
     let data = retrieveFormData(form)
     let projectId = data['project_id']
     let _token = data['csrf-token']
-    
     ajaxCRUD("POST", url, { ...data }, _token, (response) => {
       if (response.success) {
        let projectUrl = baseUrl + ":8000/project/show/"+projectId
-
-        ajaxCRUD("get", projectUrl, {  }, 'null', (data) => {
-           let div = document.createElement('div')
-           let node = data 
-           div.innerHTML= node 
-            let cardCols=  $(div).find('#task-card-wrapper').html()
-            $('#task-card-wrapper').html(cardCols)
-            // console.log(serialized);
-            task_card_script()
-              task_move()
-
-        })
-       
+       reloadTaskCards(projectUrl)
+      }
+    });
+  });
+//   Add New Stage
+  $(document).on('click','.add-stage', function (e) {
+    e.preventDefault();
+    var form = $(this).closest('form')[0];
+    let url = baseUrl + ":8000/api/project/stage/store"
+    let data = retrieveFormData(form)
+    let projectId = data['project_id']
+    let _token = data['csrf-token']
+    ajaxCRUD("POST", url, { ...data }, _token, (response) => {
+      if (response.success) {
+       let projectUrl = baseUrl + ":8000/project/show/"+projectId
+       reloadTaskCards(projectUrl)
       }
     });
   });
 
   $('.close-title-form').click(function () {
-    $('.card-title-form').hide();
-  });
+      $('.card-title-form').hide();
+    });
+//  Remove Stages with Task
+    $(document).on('click','.remove-stage', function (e) {
+        e.preventDefault();
+        var stageId = $(this).attr('data-stage-id');
+         let projectId = $('h5[data-project-id]').attr('data-project-id')
+        let url = baseUrl + ":8000/api/project/stage/delete/"+stageId
+        if (response.success) {
+        ajaxCRUD("GET", url, { stageId }, '', (response) => {
+           let projectUrl = baseUrl + ":8000/project/show/"+projectId
+           reloadTaskCards(projectUrl)
+        });
+    }
+      });
+    //   Update Stage Name
+    $(document).on('blur','.stage_name', function (e) {
+        e.preventDefault();
+        var stageId = $(this).attr('data-stage-id');
+        var stageName = $(this).text().trim();
+        console.log(stageId);
+         let projectId = $('h5[data-project-id]').attr('data-project-id')
+        let url = baseUrl + ":8000/api/project/stage/update/"+stageId
 
+        ajaxCRUD("GET", url, { stageName }, '', (response) => {
+          if (response.success) {
+           $(this).html(stageName)
+          }
+        });
+      });
 });
 
 
 /**
- * Helper functions to avoid repetition 
+ *        Card Body
+ */
+
+
+
+/**
+ * Helper functions to avoid repetition
  */
 
 // reusable ajax function
@@ -164,8 +206,26 @@ function simpleToggle(target, toggleItem, extraParam) {
               return $(this).find(toggleItem).toggleClass(extraParam.class);
           }
           return $(this).find(toggleItem).toggle({direction :extraParam.direction });
-          
-          
+
+
       });
   })
+}
+
+
+function  reloadTaskCards(projectUrl) {
+    ajaxCRUD("GET", projectUrl, {  }, 'null', (data) => {
+       let div = document.createElement('div')
+       let node = data
+       div.innerHTML= node
+        let cardCols=  $(div).find('#task-card-wrapper').html()
+        $('#task-card-wrapper').html(cardCols)
+        task_card_script()
+          task_move()
+          ajaxOntaskMove()
+
+        })
+
+
+
 }

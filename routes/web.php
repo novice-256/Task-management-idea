@@ -29,7 +29,7 @@ Route::middleware(['AuthCheck'])->group(function () {
 // Tasks
 Route::get('/',[HomeController::class,'show']);
 Route::prefix('project')->group(function()  {
-    Route::get('store',[ProjectController::class,'store']);
+    Route::post('store',[ProjectController::class,'store']);
     Route::get('show/{id}',[ProjectController::class,'show']);
 });
 
@@ -55,9 +55,17 @@ Route::prefix('role')->group(function()  {
 });
 // Api calls
 Route::prefix('api')->group(function()  {
-    Route::post('task/store',[ApiController::class,'task_store']);
-    Route::put('task/move',[ApiController::class,'task_move']);
-    Route::post('task_cards/show/{id}',[ApiController::class,'task_cards_show']);
+    Route::prefix('task')->group(function()  {
+        Route::post('store',[ApiController::class,'task_store']);
+        Route::put('move/{id}',[ApiController::class,'task_move']);
+        Route::post('task_cards/show/{id}',[ApiController::class,'task_cards_show']);
+    });
+    Route::prefix('project')->group(function()  {
+        Route::post('stage/store',[ApiController::class,'stage_store']);
+        Route::get('stage/delete/{id}',[ApiController::class,'stage_delete']);
+        Route::get('stage/update/{id}',[ApiController::class,'stage_update']);
+        Route::post('task_cards/show/{id}',[ApiController::class,'task_cards_show']);
+    });
     Route::get('delete/{id}',[ApiController::class,'destroy']);
 });
 // Route::get('drag',function(){return view('task.drag');});

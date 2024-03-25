@@ -3,42 +3,30 @@
         {{-- Stages start  --}}
         <div class="card col-3 h-50 m-3 border shadow shadow-md  card-{{$stage->name}}">
             <div class="card-header d-block positon-relative border-0 py-0 px-2 pt-3 text-capitalize">
-                <h5 class="h5 col py-2 ">
-                    <span contenteditable class="m-0 d-inline-block col-10">{{ $stage->name }}</span>
+
+                    <span contenteditable class="m-0 d-inline-block col-10 stage_name" data-stage-id=" {{ $stage->id }}">
+                        {{ $stage->name }}</span>
                     {{-- working here --}}
-                    <span class="float-right  px-1 toggle-setting  ">
-                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-                    </span>
-                </h5>
                 {{-- setting list start --}}
-                <div class="setting-list col-8 task-radius border bg-white py-2 d-none">
-                    <h6 class="h6 text-center setting-title text-gray p-2 my-auto">List Items</h6>
-                    <table class="table border-0 table-hover">
-                        <tr class="col px-3">
-                            <td>Add Card</td>
+                <div class="setting-list top-0 end-0  bg-white py-2 dropdown">
+                    <span class="float-right  px-1 dropdown-tggole" data-toggle='dropdown'>
+                        <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+                    </span>                    <table class="table border-0 table-hover dropdown-menu">
+                        <tr class="col px-3 dropdown-item">
+                            <td class="remove-stage" data-stage-id="{{$stage->id}}">Delete Stage</td>
                         </tr>
-                        <tr class="col px-3">
-                            <td>Add Card</td>
-                        </tr>
-                        <tr class="col px-3">
-                            <td>Add Card</td>
-                        </tr>
-                        <tr class="border-bottom border-secondary"></tr>
-                        <tr class="col px-3">
-                            <td>Add Card</td>
-                        </tr>
+
                     </table>
                 </div>
-
             </div>
             <div class="card-body task-parent p-0">
-                <ul class="droppable   list-group">
-                    @foreach ($task as $task_item)            
-                    @if ( $task_item->stage_id == $stage->id)
-                    <li class="draggable task-radius list-item p-0 my-2 " data-task-id="{{ $task_item->id}}"
-                        data-task-stage=" {{$task_item->stage_id}}" draggable="true">
+                <ul class="droppable   list-group" data-task-stage="{{$stage->id}}">
+                    @foreach ($task as $task_item)
+                    @if ($task_item->stage_id == $stage->id)
+                    <li class="draggable task-radius list-item p-0 my-2 " data-task-id="{{ $task_item->task_id}}"
+                         draggable="true">
                         {{-- sub-task card start --}}
-                        <div class="card sub-task  ">
+                        <div class="card sub-task">
                             <div class="task-overlay d-none p-1  "data-toggle="modal"
                                 data-target="#card-setting-modal">
                                 <span
@@ -59,22 +47,18 @@
                                     </ul>
                                 </span>
                             </div>
-                            <div class="card-header task-radius radius-bottom-0  bg-secondary ">
-                                <h6 class="h6  py-2 fw-500 text-center w-100  text-white">{{$task_item->task_name}}</h6>
+                            <div class="card-header py-2 task-radius radius-bottom-0 text-capitalize " style="background: {{$task_item->task_color}}">
                             </div>
+                            <p class=" fw-bold px-2 my-2 fw-500 text-left w-100 font-12 'text-dark'">{{$task_item->task_name}}</p>
+
                             <div class="card-body m-0 p-1 ">
                                 <ul class="task-label px-2 col-12 row">
+                                    @foreach ($labels as $label)
                                     <li class="m-1 text-light badge badge-dark col-2 rounded">
                                         <strong>
-                                            labels
                                         </strong>
                                     </li>
-                                    <li class="m-1 text-light badge badge-dark col-2 rounded">
-                                        <strong>
-                                            labels
-                                        </strong>
-                                    </li>
-
+                                    @endforeach
                                 </ul>
                                 <div class="task-mid">
                                     <strong>
@@ -99,7 +83,7 @@
                             </div>
                         </div>
 
-                    </li>   
+                    </li>
                       @endif
                     @endforeach
                     <li class="position-relative draggable not-placeable">
@@ -136,6 +120,5 @@
             </div>
         </div>
     @empty
-        <h6>No stages created for this project</h6>
     @endforelse
 

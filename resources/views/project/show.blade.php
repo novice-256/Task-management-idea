@@ -1,7 +1,7 @@
 @extends('master')
 @section('content')
     <section class="section">
-        {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <div class="section-header ">
             <h1>Board</h1>
             <div class="section-header-breadcrumb">
@@ -15,7 +15,7 @@
             <div class="w-100 p-3 d-flex justify-content-around align-items-center bg-{{ $project ? $project->bg_color : '' }}"
                 style="background:#0000003d">
                 <div class="project-title text-dark">
-                    <h5 class="h5 text-white">{{ $project ? $project->project_name : '' }}</h5>
+                    <h5 class="h5 text-white text-uppercase" data-project-id="{{$project->id}}">{{ $project ? $project->project_name : '' }}</h5>
                 </div>
                 <div class="col d-flex justify-content-center">
                     <button class="btn btn-primary mx-auto" id="show-task-form">Add Task</button>
@@ -74,10 +74,36 @@
                 </div>
             </div>
            {{-- include task cards --}}
-           <div class="card-group " id="task-card-wrapper">
+           <div class="card-group overflow-x overflow-y-none" id="task-card-wrapper">
            @include('project.card.task_cards')
+           <li class="list-unstyled col-3 mt-3 ">
+                <div class="h-auto card cursor-pointer">
+                    <p class="col py-4 my-0  align-items-center add-new-stage d-none d-flex">
+                        <span class="font-14 mx-2 d-flex"><ion-icon name="add-outline"></ion-icon></span>
+                        <span class="text-capitalize"> add another stage</span>
+                    </p>
+                    <div class="card w-100 shadow-0 border-0 px-1 py-2 position-absolute top-0 left-0 project-stage-form"
+                    style="display: none;">
+                    <form  class="new-stage-form">
+                        <input type="number" name="project_id" class="form-control"
+                        value="{{$project->id}}" hidden>
+                        <input type="text" name="csrf-token" class="form-control"
+                        value="{{ csrf_token() }}" hidden>
+                        <input type="text" name="stage_title" class="form-control" id="card-title"
+                            placeholder="Enter a title for new stage...">
+                        <div class="my-2">
+                            <span class="btn btn-primary add-stage">Add</span>
+                            <span class="btn font-14 close-title-form"><ion-icon
+                                    name="close-outline"></ion-icon></span>
+                        </div>
+                    </form>
+                </div>
+                </div>
+           </li>
+
         </div>
-        </div>
+
+    </div>
     </section>
 
     <div class="modal fade" id="card-setting-modal" tabindex="-1" role="dialog"
