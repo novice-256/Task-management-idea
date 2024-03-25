@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TaskEvents;
 use App\Models\Project;
 use App\Models\ProjectStage;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\AssignedTask;
 class ProjectController extends Controller
 {
     /**
@@ -60,8 +62,7 @@ class ProjectController extends Controller
             'project_id'=> $curr_project
            ]);
         }
-        
-        dd($stages_arr);
+        // dd($stages_arr);
         return back()->with('success','Created Successfully');
 
     }
@@ -69,8 +70,23 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function show(Project $project ,$id)
     {
+        
+    $show = Task::where('project_id',$id);
+    $labels=  $show->pluck('label')??null;
+
+    $labels=  json_decode($labels)[0] ?? null;
+    $task_id=  $show->pluck('id')[0] ??null;
+    $show = $show->get();
+    $assigned_people= AssignedTask::select('users.name')
+    ->join('users','assigned_tasks.user_id','=','users.id')
+    ->where('task_id', $task_id )->get();
+    $project = Project::where('id','=',$id)->first();
+    $stages= ProjectStage::where('project_id',$id)->get();    
+     $task= Task::where('project_id',$id)->get();
+        // TaskEvents::dispatch($task);
+        return view('project.show',compact('show' ,'assigned_people' ,'labels','project','stages' ,'task'));
 
     }
 

@@ -106,9 +106,7 @@
         <!-- Start main left sidebar menu -->
         @include('slice.sidebar')
 
-
         <!-- Start app main Content -->
-
 
 
         <div class="main-content" style="min-height: 456px;">
@@ -117,7 +115,6 @@
 
         <!-- Start app Footer part -->
         @include('slice.footer')
-
 
     </div>
 </div>
@@ -150,10 +147,8 @@
 <script src="{{asset('assets/js/page/index.js')}}"></script>
 <!-- Template JS File -->
 <script src="{{asset('assets/js/scripts.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
-<script src="{{asset('assets/js/ajax/ajax.js')}}"></script>
-
-<script src="{{asset('assets/js/ajax/ajax.js')}}"></script>
+<script  type="module  src="{{asset('assets/js/custom.js')}}"></script>
+<script type ="module" src="{{asset('assets/js/ajax/ajax.js')}}"></script>
 
 {{-- ion icons --}}
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

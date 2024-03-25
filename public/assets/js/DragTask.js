@@ -4,6 +4,8 @@
 
 //  Drag a Task
 //  Drag a Task
+export function task_move(){
+
 $('.draggable').on('dragstart', function(event) {
     $(this).addClass('is-dragging');
     });
@@ -25,12 +27,12 @@ $('.draggable').on('dragstart', function(event) {
             }
         });
     function getNearestItem(container, mouseY) {
-        const items = container.querySelectorAll('.draggable:not(.is-dragging):not(.not-placeable)');
+        const items = container.querySelectorAll('.draggable:not(.is-dragging)');
         let nearestItem = null;
         items.forEach(item => {
             const rect = item.getBoundingClientRect();
             const containerBox = container.getBoundingClientRect();
-            let threshold = containerBox.height /2
+            let threshold = containerBox.height /4
             let containerEdge = containerBox.bottom - threshold
             const elemTop = rect.top - threshold;
             const elemBottom = rect.bottom + threshold;
@@ -41,3 +43,4 @@ $('.draggable').on('dragstart', function(event) {
         });
         return nearestItem;
     }
+}

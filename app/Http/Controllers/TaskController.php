@@ -61,26 +61,11 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Task $task)
+    public function show(Task $task , $id)
     {
-    // dd(explode('@',Route::currentRouteAction())[1]);
 
-    // dd(Logger::class );
-    $show = Task::where('project_id',1);
-    // dd(count( $show->get())?'true':'false');
-    $labels=  $show->pluck('label')??null;
-
-    $labels=  json_decode($labels)[0] ?? null;
-    $task_id=  $show->pluck('id')[0] ??null;
-    $show = $show->get();
-    // dd(json_decode($labels));
-    $assigned_people= AssignedTask::select('users.name')
-    ->join('users','assigned_tasks.user_id','=','users.id')
-    ->where('task_id', $task_id )->get();
-    $project = Project::where('id','=',1)->first();
-        TaskEvents::dispatch($task);
-        return view('task.show',compact('show' ,'assigned_people' ,'labels','project'));
     }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -95,7 +80,6 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-    //    dd($request->all());
         return response()->json(['message' => 'Task updated successfully']);
     }
 

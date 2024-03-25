@@ -7,6 +7,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +28,14 @@ Route::middleware(['AuthCheck'])->group(function () {
 
 // Tasks
 Route::get('/',[HomeController::class,'show']);
-Route::post('project/store',[ProjectController::class,'store']);
+Route::prefix('project')->group(function()  {
+    Route::get('store',[ProjectController::class,'store']);
+    Route::get('show/{id}',[ProjectController::class,'show']);
+});
+
 Route::prefix('task')->group(function()  {
     Route::get('show',[TaskController::class,'show']);
+    Route::get('card',[TaskController::class,'card']);
     Route::post('store',[TaskController::class,'store']);
     Route::put('move/{id}',[TaskController::class,'update']);
 });
@@ -47,6 +53,13 @@ Route::prefix('role')->group(function()  {
     Route::post('store',[UserRoleController::class,'store']);
     Route::get('delete/{id}',[UserRoleController::class,'destroy']);
 });
-Route::get('drag',function(){return view('task.drag');});
+// Api calls
+Route::prefix('api')->group(function()  {
+    Route::post('task/store',[ApiController::class,'task_store']);
+    Route::put('task/move',[ApiController::class,'task_move']);
+    Route::post('task_cards/show/{id}',[ApiController::class,'task_cards_show']);
+    Route::get('delete/{id}',[ApiController::class,'destroy']);
+});
+// Route::get('drag',function(){return view('task.drag');});
 
 });

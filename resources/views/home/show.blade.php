@@ -125,7 +125,7 @@
                                                 <i class="fas fa-tshirt"></i>
                                             </div>
                                             <div class="wizard-step-label">
-                                             <a href="{{url('task/show')}}" class="text-white">
+                                             <a href="{{url("project/show/$item->id")}}" class="text-white">
                                                  {{$item->project_name}}
                                                 </a>
                                             </div>
@@ -142,11 +142,7 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="section">
-
-        <div class="section-body">
+    
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -183,7 +179,6 @@
                 </div>
             </div>
 
-        </div>
     </section>
 
                 @include('home.project')

@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->integer('project_id');
             $table->string('task_name');
-            $table->string('description');
-            $table->string('other_info');
+            $table->string('description')->nullable();;
+            $table->string('other_info')->nullable();;
             $table->integer('task_limit')->nullable();
             $table->integer('assigned_by');
             $table->string('task_color')->default('#b52f2f');
             $table->integer('label')->default(0);
-            $table->string('project_stage_id')->default(1);
+            $table->string('stage_id');
             $table->timestamps();
         });
     }
